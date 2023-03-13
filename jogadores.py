@@ -26,7 +26,7 @@ class Jogador:
         proprietario = propriedade.proprietario
         if proprietario is not None:
             self.saldo -= propriedade.aluguel
-            propriedade.proprietario.saldo += propriedade.aluguel
+            proprietario.saldo += propriedade.aluguel
         else:
             self.comprar_ou_nao(propriedade)
 
@@ -50,5 +50,5 @@ class Jogador:
                 propriedade.proprietario = None
 
     @staticmethod
-    def get_jogadores_rodada():
+    def get_jogadores_simulacao():
         return [Jogador(tipo) for tipo in tipos]

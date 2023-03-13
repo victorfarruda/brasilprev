@@ -1,3 +1,5 @@
+import random
+
 from jogadores import Jogador
 from propriedades import tabuleiro
 
@@ -55,8 +57,9 @@ def main():
     timeout = 0
     comportamento = {'IMPULSIVO': 0, 'EXIGENTE': 0, 'CAUTELOSO': 0, 'ALEATORIO': 0}
     for simulacao in range(300):
-        jogadores = Jogador.get_jogadores_rodada()
+        jogadores = Jogador.get_jogadores_simulacao()
         for rodada in range(1000):
+            jogadores = random.choices(jogadores, k=len(jogadores))
             if len(jogadores) == 1:
                 finaliza_rodada(comportamento, jogadores, turnos, rodada)
                 break
