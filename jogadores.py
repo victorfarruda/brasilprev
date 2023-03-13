@@ -49,4 +49,6 @@ class Jogador:
             if propriedade.proprietario == self:
                 propriedade.proprietario = None
 
-
+    @staticmethod
+    def get_jogadores_rodada():
+        return [Jogador(tipo) for tipo in tipos]
