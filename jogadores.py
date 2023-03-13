@@ -13,7 +13,7 @@ class Jogador:
     def jogar_dado(self):
         return randint(1, 6)
 
-    def calcula_posicao_tabuleiro(self):
+    def calcular_posicao_tabuleiro(self):
         dado = self.jogar_dado()
         if self.posicao_atual + dado > 20:
             self.posicao_atual = self.posicao_atual + dado - 20
@@ -22,7 +22,7 @@ class Jogador:
             self.posicao_atual += dado
         return self.posicao_atual
 
-    def valida_rodada(self, propriedade):
+    def validar_rodada(self, propriedade):
         proprietario = propriedade.proprietario
         if proprietario is not None:
             self.saldo -= propriedade.aluguel
@@ -44,11 +44,11 @@ class Jogador:
             if self.saldo - propriedade.venda >= 0:
                 self.saldo -= propriedade.venda
 
-    def libera_propriedades(self, tabuleiro):
+    def liberar_propriedades(self, tabuleiro):
         for propriedade in tabuleiro:
             if propriedade.proprietario == self:
                 propriedade.proprietario = None
 
     @staticmethod
-    def get_jogadores_simulacao():
+    def pegar_jogadores_simulacao():
         return [Jogador(tipo) for tipo in tipos]

@@ -36,17 +36,17 @@ def calcular_ganhador(jogadores, comportamento, timeout, turnos):
 
 
 def jogar_rodada(j):
-    vez = j.calcula_posicao_tabuleiro()
+    vez = j.calcular_posicao_tabuleiro()
     propriedade = tabuleiro[vez - 1]
-    j.valida_rodada(propriedade)
+    j.validar_rodada(propriedade)
 
 
 def jogador_perdeu(jogadores, j):
-    j.libera_propriedades(tabuleiro)
+    j.liberar_propriedades(tabuleiro)
     jogadores.remove(j)
 
 
-def finaliza_rodada(comportamento, jogadores,turnos, rodada):
+def finalizar_rodada(comportamento, jogadores, turnos, rodada):
     comportamento[jogadores[0].tipo] = comportamento[jogadores[0].tipo] + 1
     turnos.append(rodada + 1)
     return rodada
@@ -57,11 +57,11 @@ def main():
     timeout = 0
     comportamento = {'IMPULSIVO': 0, 'EXIGENTE': 0, 'CAUTELOSO': 0, 'ALEATORIO': 0}
     for simulacao in range(300):
-        jogadores = Jogador.get_jogadores_simulacao()
+        jogadores = Jogador.pegar_jogadores_simulacao()
         for rodada in range(1000):
             jogadores = random.choices(jogadores, k=len(jogadores))
             if len(jogadores) == 1:
-                finaliza_rodada(comportamento, jogadores, turnos, rodada)
+                finalizar_rodada(comportamento, jogadores, turnos, rodada)
                 break
 
             for j in jogadores:
