@@ -31,9 +31,10 @@ class Jogador:
             self.comprar_ou_nao(propriedade)
 
     def comprar_ou_nao(self, propriedade):
+        preco_venda = propriedade.venda
         if self.tipo == 'IMPULSIVO' or \
                 self.tipo == 'EXIGENTE' and propriedade.aluguel > 50 or \
-                self.tipo == 'CAUTELOSO' and self.saldo - propriedade.venda > 80:
+                self.tipo == 'CAUTELOSO' and self.saldo - preco_venda > 80:
             comprar = 1
         elif self.tipo == 'ALEATORIO':
             comprar = randint(0, 1)
@@ -41,13 +42,14 @@ class Jogador:
             comprar = 0
 
         if comprar:
-            if self.saldo - propriedade.venda >= 0:
-                self.saldo -= propriedade.venda
+            if self.saldo - preco_venda >= 0:
+                self.saldo -= preco_venda
+                propriedade.colocar_proprietario(self)
 
     def liberar_propriedades(self, tabuleiro):
         for propriedade in tabuleiro:
             if propriedade.proprietario == self:
-                propriedade.proprietario = None
+                propriedade.colocar_proprietario(None)
 
     @staticmethod
     def pegar_jogadores_simulacao():
