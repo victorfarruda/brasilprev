@@ -1,5 +1,5 @@
-from jogadores import Jogador
-from propriedades import Propriedade
+from jogador import Jogador
+from propriedade import Propriedade
 
 
 def test_pode_criar_propriedade():

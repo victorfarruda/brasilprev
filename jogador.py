@@ -9,8 +9,10 @@ class Jogador:
         self.saldo = 300
         self.tipo = tipo
         self.posicao_atual = 0
+        self.comprar = 0
 
-    def jogar_dado(self):
+    @classmethod
+    def jogar_dado(cls):
         return randint(1, 6)
 
     def calcular_posicao_tabuleiro(self):
@@ -32,19 +34,21 @@ class Jogador:
 
     def comprar_ou_nao(self, propriedade):
         preco_venda = propriedade.venda
+        self.comprar = 0
         if self.tipo == 'IMPULSIVO' or \
                 self.tipo == 'EXIGENTE' and propriedade.aluguel > 50 or \
                 self.tipo == 'CAUTELOSO' and self.saldo - preco_venda > 80:
-            comprar = 1
+            self.comprar = 1
         elif self.tipo == 'ALEATORIO':
-            comprar = randint(0, 1)
-        else:
-            comprar = 0
+            self.comprar = randint(0, 1)
 
-        if comprar:
-            if self.saldo - preco_venda >= 0:
-                self.saldo -= preco_venda
-                propriedade.colocar_proprietario(self)
+        if self.comprar == 1:
+            self.comprar_propriedade(propriedade, preco_venda)
+
+    def comprar_propriedade(self, propriedade, preco_venda):
+        if self.saldo - preco_venda >= 0:
+            self.saldo -= preco_venda
+            propriedade.colocar_proprietario(self)
 
     def liberar_propriedades(self, tabuleiro):
         for propriedade in tabuleiro:

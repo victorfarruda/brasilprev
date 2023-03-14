@@ -1,7 +1,7 @@
 import random
 
-from jogadores import Jogador
-from propriedades import tabuleiro
+from jogador import Jogador
+from propriedade import tabuleiro
 
 
 class Main:
